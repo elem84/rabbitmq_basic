@@ -14,7 +14,7 @@ amqp.connect('amqp://app_full:app_full@localhost/app_1', function(error0, connec
             throw error1;
         }
 
-        var exchange = 'fanout_ex';
+        var exchange = 'fanout_ex_app';
         var msg = JSON.stringify({
             'text': 'Hello world'
         });

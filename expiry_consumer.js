@@ -18,7 +18,7 @@ amqp.connect('amqp://app_full:app_full@localhost/app_1', function(err1, connecti
 
         channel.consume('q_expiry_app', function(msg) {
 
-            console.log(msg);
+            console.log(msg.content.toString());
         });
 
         console.info('OK');

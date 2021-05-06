@@ -4,9 +4,10 @@ services:
 
   rabbit1:
     image: rabbitmq:3-management
-    hostname: rabbit1
+    hostname: docker1
     environment:
       - RABBITMQ_ERLANG_COOKIE=test
+      - RABBITMQ_NODENAME=rabbit1
     ports:
       - "5672:5672"
       - "8081:15672"
@@ -16,22 +17,24 @@ services:
 
   rabbit2:
     image: rabbitmq:3-management
-    hostname: rabbit2
+    hostname: docker2
     ports:
       - "5673:5672"
       - "8082:15672"
     environment:
       - RABBITMQ_ERLANG_COOKIE=test
+      - RABBITMQ_NODENAME=rabbit2
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
 
   rabbit3:
     image: rabbitmq:3-management
-    hostname: rabbit3
+    hostname: docker3
     ports:
       - "5674:5672"
       - "8083:15672"
     environment:
       - RABBITMQ_ERLANG_COOKIE=test
+      - RABBITMQ_NODENAME=rabbit3
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf

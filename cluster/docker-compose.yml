@@ -10,7 +10,7 @@ services:
       - RABBITMQ_NODENAME=rabbit1
     ports:
       - "5672:5672"
-      - "8081:15672"
+      - "15672:15672"
       - "25672:25672"
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
@@ -22,7 +22,8 @@ services:
     hostname: docker2
     ports:
       - "5673:5672"
-      - "8082:15672"
+      - "15673:15672"
+      - "25673:25672"
     environment:
       - RABBITMQ_ERLANG_COOKIE=test
       - RABBITMQ_NODENAME=rabbit2
@@ -36,7 +37,8 @@ services:
     hostname: docker3
     ports:
       - "5674:5672"
-      - "8083:15672"
+      - "15674:15672"
+      - "25674:25672"
     environment:
       - RABBITMQ_ERLANG_COOKIE=test
       - RABBITMQ_NODENAME=rabbit3

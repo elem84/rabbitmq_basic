@@ -1,6 +1,6 @@
 var amqp = require('amqplib/callback_api');
 
-amqp.connect('amqp://app_full:app_full@localhost/app_1', function(error0, connection) {
+amqp.connect('amqp://localhost', function(error0, connection) {
 
     if (error0)
     {

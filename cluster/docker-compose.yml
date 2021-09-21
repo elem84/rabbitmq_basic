@@ -3,27 +3,27 @@ version: '3'
 services:
 
   rabbit1:
-    image: rabbitmq:3-management
+    image: rabbitmq:3.8-management
     hostname: docker1
     environment:
       - RABBITMQ_ERLANG_COOKIE=test
       - RABBITMQ_NODENAME=rabbit1
     ports:
-      - "5672:5672"
-      - "15672:15672"
-      - "25672:25672"
+      - "5673:5672"
+      - "15673:15672"
+      - "25673:25672"
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
 
   rabbit2:
-    image: rabbitmq:3-management
+    image: rabbitmq:3.8-management
     depends_on:
       - rabbit1
     hostname: docker2
     ports:
-      - "5673:5672"
-      - "15673:15672"
-      - "25673:25672"
+      - "5674:5672"
+      - "15674:15672"
+      - "25674:25672"
     environment:
       - RABBITMQ_ERLANG_COOKIE=test
       - RABBITMQ_NODENAME=rabbit2
@@ -31,14 +31,14 @@ services:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
 
   rabbit3:
-    image: rabbitmq:3-management
+    image: rabbitmq:3.8-management
     depends_on:
       - rabbit1
     hostname: docker3
     ports:
-      - "5674:5672"
-      - "15674:15672"
-      - "25674:25672"
+      - "5675:5672"
+      - "15675:15672"
+      - "25675:25672"
     environment:
       - RABBITMQ_ERLANG_COOKIE=test
       - RABBITMQ_NODENAME=rabbit3

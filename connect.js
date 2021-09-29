@@ -8,6 +8,4 @@ amqp.connect('amqp://localhost', function(err1, connection) {
     }
 
     console.info('Connected');
-
-    connection.close();
 });

@@ -1,0 +1,51 @@
+using RabbitMQ.Client;
+using System;
+using System.Text;
+
+namespace ConsoleSenderExchange
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Witajcie w aplikacji, która wysyła wiadomości!");
+            Console.WriteLine("\n--------------------\n");
+            Console.WriteLine("Wciśnij ESC, aby zakończyć działanie aplikacji");
+            Console.WriteLine("\n--------------------\n");
+
+            var factory = new ConnectionFactory() { HostName = "localhost" };
+
+            // otwarcie połączenia
+            using (var connection = factory.CreateConnection())
+            {
+                // utworzenie kanału komunikacji
+                using (var channel = connection.CreateModel())
+                {
+                    channel.ExchangeDeclare(exchange: "cars", type: "fanout");
+
+                    do
+                    {
+                        Console.WriteLine("Wprowadz wiadomość do wysłania: ");
+
+                        string msg = Console.ReadLine();
+                        var msgBody = Encoding.UTF8.GetBytes(msg);
+
+                        // publikacja do 'exchange' - nie do kolejki jak w poprzednim przykładzie
+                        channel.BasicPublish(
+                            exchange: "cars",
+                            routingKey: "",
+                            basicProperties: null,
+                            body: msgBody
+                        );
+
+                        Console.WriteLine($" [x] wysłano {msgBody}");
+
+                    } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+                }
+            }
+
+            Console.WriteLine("Wciśnij [Enter], aby wyłączyć aplikację");
+            Console.ReadLine();
+        }
+    }
+}
